@@ -1,0 +1,31 @@
+.productContainer {
+  width: 35vw;
+  font-size: 1.3rem;
+  padding: 13px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* border: 1px solid black; */
+}
+
+.form {
+  width: 100%;
+  text-indent: 3px;
+  text-align: left;
+}
+
+.form input {
+  letter-spacing: 2px;
+  word-spacing: 4px;
+}
+
+.submitBtn {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.para {
+  font-size: 16px;
+  text-indent: 35px;
+}
