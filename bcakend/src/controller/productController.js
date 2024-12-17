@@ -102,10 +102,16 @@ const handleUpdateProduct = async (req, res) => {
   }
 };
 
+const handleSearchProductByKey = async (req, res) => {
+  const searchedProduct = await productModel.find(req.query);
+  return res.json(searchedProduct);
+};
+
 module.exports = {
   handleAddProduct,
   handleGetProducts,
   handleDeleteProduct,
   handleSingleProductGet,
   handleUpdateProduct,
+  handleSearchProductByKey,
 };

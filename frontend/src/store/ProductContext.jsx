@@ -15,6 +15,8 @@ const reducer = (productList, action) => {
   } else if (action.type === "DELETE_PORDUCT") {
     const productID = action.payload.product_id;
     newProductList = productList.filter((product) => product._id !== productID);
+  } else if (action.type === "SEARCHING_PRODUCT") {
+    newProductList = action.payload.result;
   }
   return newProductList;
 };

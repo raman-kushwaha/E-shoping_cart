@@ -37,26 +37,24 @@ const UpdateProduct = () => {
   const handleUpdateProduct = async (event) => {
     event.preventDefault();
 
-    const product = Product.current.value;
-    const category = Category.current.value;
-    const company = Company.current.value;
-    const price = Price.current.value;
-
     const user = JSON.parse(localStorage.getItem("user"));
 
-    const res = await fetch(`http://localhost:8001/product/${id}`, {
-      method: "put",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({
-        productname: Product.current.value,
-        category: Category.current.value,
-        company: Company.current.value,
-        userID: user._id,
-        price: Price.current.value,
-      }),
-    });
-
-    navigate("/");
+    try {
+      const res = await fetch(`http://localhost:8001/product/${id}`, {
+        method: "put",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          productname: Product.current.value,
+          category: Category.current.value,
+          company: Company.current.value,
+          userID: user._id,
+          price: Price.current.value,
+        }),
+      });
+      navigate("/");
+    } catch (err) {
+      console.log(err);
+    }
   };
   return (
     <>

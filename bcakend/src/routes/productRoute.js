@@ -8,12 +8,14 @@ const {
   handleDeleteProduct,
   handleSingleProductGet,
   handleUpdateProduct,
+  handleSearchProductByKey,
 } = require("../controller/productController");
 
 //
 //
 productRoute.get("/products", handleGetProducts);
 productRoute.post("/product", handleAddProduct);
+productRoute.get("/search", handleSearchProductByKey);
 
 productRoute
   .route("/:id")

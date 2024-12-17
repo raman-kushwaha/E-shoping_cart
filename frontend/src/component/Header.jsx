@@ -1,12 +1,31 @@
+import styles from "./Header.module.css";
 import { Link, useNavigate } from "react-router-dom";
+import { FaSearch } from "react-icons/fa";
+import { useContext } from "react";
+import { ProductContextList } from "../store/ProductContext";
 
 const Header = ({ selectedTab, setSelectedTab }) => {
+  const { dispatchProductList } = useContext(ProductContextList);
   const auth = localStorage.getItem("user");
   const navigate = useNavigate();
 
   const handleOnClick = (event) => {
     localStorage.clear();
     navigate("/signup");
+  };
+
+  const handleSearchProduct = async (event) => {
+    let key = event.target.value;
+
+    const res = await fetch(
+      `http://localhost:8001/product/search?product_name=${key}`
+    );
+    const result = await res.json();
+
+    dispatchProductList({
+      type: "SEARCHING_PRODUCT",
+      payload: { result },
+    });
   };
 
   return (
@@ -105,6 +124,22 @@ const Header = ({ selectedTab, setSelectedTab }) => {
                 Logout
               </Link>
             </li>
+            <form
+              class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3"
+              role="search"
+              onSubmit={(event) => event.preventDefault()}
+            >
+              <div className={styles.search}>
+                <input
+                  type="search"
+                  class="form-control form-control-dark text-bg-light"
+                  placeholder="Search..."
+                  aria-label="Search"
+                  onChange={handleSearchProduct}
+                />
+                <FaSearch />
+              </div>
+            </form>
           </ul>
         ) : (
           <ul className="nav nav-pills">
@@ -138,5 +173,3 @@ const Header = ({ selectedTab, setSelectedTab }) => {
 };
 
 export default Header;
-
-/** */
